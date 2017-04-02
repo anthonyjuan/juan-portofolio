@@ -14,7 +14,7 @@ let seedDataUser = (req, res) => {
 let getUser = (req, res) => {
   User.find({}, (err,results) => {
     if(err) {
-      res.send(err);
+      res.send(err.message);
     } else {
       res.send(results);
     }
@@ -29,7 +29,7 @@ let createUser = (req, res) => {
 
   newUser.save((err,result) => {
     if(err) {
-      res.send(err)
+      res.send(err.message)
     } else {
       res.send(result)
     }

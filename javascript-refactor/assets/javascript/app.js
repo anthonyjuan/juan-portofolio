@@ -20,6 +20,7 @@ class diceModel {
   constructor() {
 
   }
+
 }
 
 class diceController {
