@@ -3,7 +3,7 @@ const event = require('../controllers/eventControls');
 
 //get event
 routes.get('/events', (req, res) => {
-  res.render('index',{error:"",success:""});
+  res.render('events/index',{error:"",success:""});
 })
 routes.get('/', event.getEvent);
 

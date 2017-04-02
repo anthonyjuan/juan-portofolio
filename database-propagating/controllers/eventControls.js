@@ -11,13 +11,13 @@ let addEvent = (req ,res) => {
   newEvent.save((err) => {
     if(err) {
       if(err.errors) {
-        res.render('index', {error: err,success:""});
+        res.render('events/index', {error: err,success:""});
       } else {
-        res.render('index',{error:"That event is already exist",success:""})
+        res.render('events/index',{error:"That event is already exist",success:""})
       }
 
     } else {
-      res.render('index', {error:"", success: 'Input data success'})
+      res.render('events/index', {error:"", success: 'Input data success'})
     }
   })
 }
@@ -28,7 +28,7 @@ let getEvent = (req ,res) => {
     if(err) {
       res.send(err);
     } else {
-      res.send(results);
+      res.render('index',{data:results});
     }
   })
 }
