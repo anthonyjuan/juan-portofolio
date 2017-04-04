@@ -5,6 +5,8 @@
     <title>  </title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/classic.date.css">
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Compiled and minified JavaScript -->
@@ -42,8 +44,8 @@
                <td><%= event.name %></td>
                <td><%= event.date %></td>
                <td><%= event.email %></td>
-               <td><a href="#">Edit</a></td>
-               <td><a href="#">Delete</a></td>
+               <td><a href="/events/edit-event/<%= event.id %>">Edit</a></td>
+               <td><a onclick="return confirm('Are you sure?')" href="/events/<%= event.id %>">Delete</a></td>
              </tr>
            <% }) %>
          </tbody>

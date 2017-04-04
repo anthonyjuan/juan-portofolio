@@ -13,7 +13,15 @@ const eventSchema = new Schema({
   },
   email: {
     type: String,
+    validate: {
+      validator: function(params) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(params);
+      },
+      message: 'not a valid email'
+    },
     required: [true, 'email can not be empty']
+
   }
 })
 

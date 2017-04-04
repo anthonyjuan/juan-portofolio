@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/classic.date.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="/js/picker.js"></script>
+    <script type="text/javascript" src="/js/picker.date.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script>
+    $(document).ready(() => {
+
+      $('.datepicker').pickadate({
+        monthsFull: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        today: 'aujourd\'hui',
+        clear: 'effacer',
+        formatSubmit: 'm/d/yyyy'
+      });
+    })
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo"></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/events">Add Event</a></li>
+            <li><a href="/">View Event</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <h1>Elshadai event organizer</h1>
+      <form class="col s12" action="/events/edit/<%= dataevent._id %>" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <input name="name" type="text" class="validate" value="<%= dataevent.name %>">
+            <label for="eventname">Event Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+
+            <input name="email" id="email" type="email" class="validate" value="<%= dataevent.email %>">
+            <label for="eventname">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%
+            let date = new Date(dataevent.date);
+            %>
+            <input name="date" type="date" class="datepicker" data-value="<%= date.toLocaleDateString() %>">
+          </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit">
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
