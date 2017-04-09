@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery-3.2.0.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="modal" v-bind:class="{'is-active': active}">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" @click="toggleModal"></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <div class="field">
+              <label class="label">Title</label>
+              <p class="control">
+                <input id="title" class="input" type="text" v-model="dataEdit.title">
+              </p>
+            </div>
+            <div class="field">
+              <label class="label">Memo</label>
+              <p class="control">
+                <textarea id="content" class="textarea" v-model="dataEdit.content"></textarea>
+              </p>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <a class="button is-success" @click="editMemo(dataEdit)">Save changes</a>
+            <a class="button" @click="toggleModal">Cancel</a>
+          </footer>
+        </div>
+      </div>
+      <nav class="nav has-shadow">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item">
+              Memo Apps
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <section class="section">
+          <div class="field">
+            <label class="label">Title</label>
+            <p class="control">
+              <input id="title" class="input" type="text" placeholder="Title input" v-model="title">
+            </p>
+          </div>
+          <div class="field">
+            <label class="label">Memo</label>
+            <p class="control">
+              <textarea id="content" class="textarea" placeholder="Menanak Nasi, Menguras Sungai..." v-model="content"></textarea>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button @click="postMemo" id="submit" class="button is-primary">Submit</button>
+            </p>
+          </div>
+        </section>
+        <section class="section">
+          <p class="subtitle">Daftar Memo</p>
+          <hr>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Created At</th>
+                <th colspan="2">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="memo in memos">
+                <td>{{memo.title}}</td>
+                <td>{{memo.content}}</td>
+                <td>{{memo.createdAt}}</td>
+                <td><a @click="toggleModal(memo)">Edit</a></td>
+                <td><a @click="deleteMemo(memo.id)">Delete</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
+  <script src="js/script.js" charset="utf-8"></script>
+</html>
