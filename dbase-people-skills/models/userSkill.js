@@ -8,7 +8,6 @@ const userSkillSchema = new Schema({
       skill:{
         type: Schema.Types.ObjectId,
         ref: 'Skill'
-
       },
       point: Number
     }

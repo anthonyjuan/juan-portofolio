@@ -1,0 +1,15 @@
+.header{
+  border: 1px solid grey;
+  border-radius: 10px;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.column {
+  border: 1px solid black;
+  height: 250px;
+  border-radius: 10px;
+}
