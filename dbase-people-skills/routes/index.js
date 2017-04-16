@@ -18,6 +18,7 @@ routes.get('/skills/seed-skill', skill.seedDataSkill);
 
 
 //create data
+
 routes.post('/users', user.createUser);
 routes.post('/userskills', skillUser.createSkillUser)
 
