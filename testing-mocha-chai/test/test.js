@@ -10,7 +10,7 @@ chai.use(chaiHTTP);
 
 describe('testing routing get data dan create data from db user', () => {
 
-    monggo.models.User.collection.drop();
+    // monggo.models.User.collection.drop();
 
     it('it should GET all the users', (done) => {
       chai.request('http://localhost:3000')

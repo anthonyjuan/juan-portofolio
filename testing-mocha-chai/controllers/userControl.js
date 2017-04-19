@@ -26,12 +26,30 @@ let createUser = (req, res) => {
     }
   })
 }
+
 let deleteUser = (req, res) => {
   User.findByIdAndRemove(req.params.id,(err) => {
     if(err) {
       res.send({success:false, data:err.message})
     } else {
       res.send({success:true, msg:'Data deleted'})
+    }
+  })
+}
+
+let updateUser = (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    {
+      name     : req.body.name,
+      email    : req.body.email,
+      password : req.body.password
+    },
+    (err) => {
+    if(err) {
+      res.send({success:false, data:err.message})
+    } else {
+      res.send({success:true, msg:'Data updated'})
     }
   })
 }

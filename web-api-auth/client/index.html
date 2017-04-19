@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/vue@2.2.6" charset="utf-8"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+
+    <title>Client Auth</title>
+  </head>
+  <body>
+    <div id="app">
+        <nav class="nav">
+          <div class="nav-left" @click="showHome">
+            <a class="nav-item">
+              BULU MATA
+            </a>
+          </div>
+
+          <div class="nav-item">
+              <div class="field is-grouped">
+                <p v-if="statusLogin" class="control">
+                  <a class="button">
+                    <span>Logout</span>
+                  </a>
+                </p>
+                <p v-if="statusLogin == false" class="control"  @click="showLogin">
+                  <a class="button">
+                    <span>Login</span>
+                  </a>
+                </p>
+                <p v-if="statusLogin == false" class="control" @click="showSignup">
+                  <a class="button is-primary">
+                    <span>Sign up</span>
+                  </a>
+                </p>
+              </div>
+          </div>
+        </nav>
+        <div class="container">
+          <p class="title">{{test}}</p>
+          <div class="form-login" v-if="showLoginState" >
+            <div class="field">
+              <p class="control has-icons-left">
+                <input v-model="email" class="input" type="email" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input v-model="password" class="input" type="password" placeholder="Password">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control">
+                <button class="button is-success">
+                  Login
+                </button>
+              </p>
+            </div>
+          </div>
+          <div class="form-signup" v-if="showSignupState" >
+            <div class="field">
+              <p class="control has-icons-left">
+                <input v-model="email" class="input" type="email" placeholder="Email">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input v-model="password" class="input" type="password" placeholder="Password">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control">
+                <button class="button is-success" @click="signUp">
+                  Sign Up
+                </button>
+              </p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </body>
+  <script src="script.js" charset="utf-8"></script>
+</html>
