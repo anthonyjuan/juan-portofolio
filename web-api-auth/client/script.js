@@ -6,7 +6,8 @@ let app = new Vue({
     showLoginState: false,
     showSignupState: false,
     email:'',
-    password:''
+    password:'',
+    users: []
   },
   methods: {
     showHome: function() {
@@ -23,7 +24,17 @@ let app = new Vue({
       this.showSignupState = true
     },
     login: function() {
+      axios.post('http://localhost:3000/login',{
+        email: this.email,
+        password: this.password
+      })
+      .then(function(res) {
+        if(res.data.success) {
+          window.localStorage.setItem('token', res.data.token)
+          window.location.reload()
+        }
 
+      })
     },
     checkLoginState: function() {
       if(window.localStorage.token) {
@@ -33,9 +44,10 @@ let app = new Vue({
       }
     },
     getAllUser: function() {
-      axios.get('http://localhost:3000')
+      let self = this
+      axios.get('http://localhost:3000',{headers: {'token': window.localStorage.getItem('token')}})
            .then(function(res){
-             console.log(res.data);
+             self.users = res.data
            })
     },
     signUp: function() {
@@ -49,6 +61,10 @@ let app = new Vue({
         .then(function(res) {
           console.log(res.data);
         })
+    },
+    logout: function() {
+      localStorage.clear();
+      window.location.reload()
     }
   },
   mounted: function() {

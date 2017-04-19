@@ -2,10 +2,7 @@ let express = require('express');
 let index = require('./routes/index');
 let bodyPars = require('body-parser');
 let cors = require('cors');
-let passport = require('passport');
-let passportLocal = require('passport-local');
 let monggo = require('mongoose');
-let Strategy = passportLocal.Strategy;
 
 
 let app = express();
