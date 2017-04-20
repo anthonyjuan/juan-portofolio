@@ -33,6 +33,18 @@ describe('testing routing get data dan create data from db user', () => {
       });
     });
 
+    it('it should update one users', (done) => {
+      chai.request('http://localhost:3000')
+      .put('/users/58f37752cf80e3450062404b')
+      .send({ name: 'juanjuan',email:'juju@gmail.com', password: '123' })
+      .end((err, res) => {
+        console.log(res.body);
+        res.should.have.status(200);
+        res.body.should.have.property('success').with.equal(true);
+        done();
+      });
+    });
+
     it('it should delete one users', (done) => {
       chai.request('http://localhost:3000')
       .delete('/users/58f37752cf80e3450062404b')
