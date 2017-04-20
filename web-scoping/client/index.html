@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+    <script src="js/jquery-3.2.0.js" charset="utf-8"></script>
+    <style media="screen">
+      .hero-body {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="nav has-shadow">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item is-tab is-hidden-mobile" onclick="getHome()">Home</a>
+            <a class="nav-item is-tab is-hidden-mobile" onclick="getSkills()">Skills</a>
+            <a class="nav-item is-tab is-hidden-mobile" onclick="getMeals()">Meals</a>
+          </div>
+        </div>
+      </nav>
+      <section class="hero" id="home">
+        <div class="hero-body">
+
+            <h1 id="h1-home">Heading</h1>
+            <br>
+            <a onclick="changeHeading()" class="button button-html is-success" data-heading="Berubah!!!">change Heading</a>
+
+        </div>
+      </section>
+      <section class="hero" id="skills">
+        <div class="hero-body">
+
+            <h1 id="h1-skills">Skills</h1>
+            <br>
+            <a onclick="changeHeadingUsingUrl()" class="button button-skills is-success">get Skills</a>
+
+        </div>
+      </section>
+      <section class="hero" id="meals">
+        <div class="hero-body">
+
+            <h1 id="h1-meals">Meals</h1>
+            <br>
+            <a onclick="changeHeadingUsingStorage()" class="button is-success">get Meals</a>
+
+        </div>
+      </section>
+
+    </div>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/script.js" charset="utf-8"></script>
+</html>

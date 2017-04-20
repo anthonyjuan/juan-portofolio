@@ -59,7 +59,8 @@ let app = new Vue({
           password: self.password
         })
         .then(function(res) {
-          console.log(res.data);
+          this.showSignupState = false
+          this.showLoginState = true
         })
     },
     logout: function() {
