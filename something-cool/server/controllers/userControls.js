@@ -1,4 +1,5 @@
 let User = require('../models/user')
+let Post = require('../models/post')
 let pwh = require('password-hash')
 let jwt = require('jsonwebtoken')
 
@@ -31,6 +32,26 @@ module.exports = {
       }
     })
   },
+  getUserFollowingPost: (req, res) => {
+    User.findOne(
+      {_id: req.params.id},
+      function(err,user) {
+        if(!err) {
+          user.following.map((follow) => {
+            Post.find({user: follow}, function(err,posts) {
+              if(!err) {
+                res.send({success:true, result:posts})
+              } else {
+                res.send({success:false, result:err})
+              }
+            })
+          })
+        } else {
+          res.send({success:false, result:err})
+        }
+      }
+    )
+  },
   login: (req, res) => {
     User.findOne({username: req.body.username}, function(err, user) {
       if(err || user == null) {
@@ -46,7 +67,7 @@ module.exports = {
     })
   },
   getUserFollowing: (req, res) => {
-    User.findOne({_id : req.body.userid})
+    User.findOne({_id : req.params.id})
         .populate('following')
         .exec(function(err,user) {
           if(!err) {

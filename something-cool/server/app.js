@@ -3,6 +3,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     index = require('./routes/index'),
     user = require('./routes/user'),
+    post = require('./routes/post'),
     app = express();
 
 
@@ -16,6 +17,7 @@ mongoose.connection.on('connected', () => {
 
 app.use('/api',index)
 app.use('/api/user',user)
+app.use('/api/post',post)
 app.listen(3000, () => {
   console.log('Express is running');
 })
