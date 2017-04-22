@@ -2,6 +2,8 @@ let User = require('../models/user')
 let pwh = require('password-hash')
 let jwt = require('jsonwebtoken')
 
+require('dotenv').config()
+
 module.exports = {
   createUser: (req, res) => {
     let newUser = new User({
@@ -35,7 +37,8 @@ module.exports = {
         res.send({success: false, msg:'User not found'})
       } else {
         if(pwh.verify( req.body.password,user.password)){
-          res.send({success:true, msg:'login success'})
+          let newToken = jwt.sign({username:user.username, id:user._id}, process.env.SECRET)
+          res.send({success:true, msg:'login success', token: newToken})
         } else {
           res.send({success:false, msg:'wrong password'})
         }
