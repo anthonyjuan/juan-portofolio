@@ -8,6 +8,8 @@ routes.put('/follow', auth.verify, user.followUser)
 
 routes.put('/unfollow', auth.verify, user.unfollowUser)
 
-routes.get('/:id', auth.verify, user.getUserFollowingPost)
+routes.get('/followingpost/:id', auth.verify, user.getUserFollowingPost)
+
+routes.get('/:id', auth.verify, user.getOneUser)
 
 module.exports = routes;

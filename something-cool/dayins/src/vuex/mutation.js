@@ -68,7 +68,7 @@ export const actions = {
   getFollowingPosts({commit}) {
     let id = window.localStorage.id
 
-    axios.get(`http://localhost:3000/api/user/${id}`,
+    axios.get(`http://localhost:3000/api/user/followingpost/${id}`,
               {headers: {'token': window.localStorage.getItem('token')}})
          .then(function(res) {
            if(res.data.success){
@@ -124,7 +124,7 @@ export const actions = {
     commit('ADD_POST_DIALOG', data)
   },
   editPost({commit}, post) {
-    axios.put(`http://localhost:3000/api/posts/${post.id}`,{
+    axios.put(`http://localhost:3000/api/post/${post.id}`,{
       title: post.title,
       content: post.content
     },{headers: {'token': window.localStorage.getItem('token')}})
@@ -135,6 +135,19 @@ export const actions = {
         commit('EDIT_POST',post)
       }
     })
+  },
+  followUser({commit}, idtarget) {
+
+    axios.put(
+      'http://localhost:3000/api/user/follow',
+      {
+        userid: window.localStorage.id,
+        targetid: idtarget
+      },
+      {headers: {'token': window.localStorage.getItem('token')}})
+      .then(function(res) {
+        console.log(res.data);
+      })
   }
 }
 

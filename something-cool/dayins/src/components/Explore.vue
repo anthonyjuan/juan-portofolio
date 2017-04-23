@@ -7,7 +7,23 @@
           <span>{{post.caption}}</span>
           <div class="bottom clearfix">
             <time class="time">{{ post.createdAt }}</time>
-            <el-button type="text" class="button">{{post.user.username}}</el-button>
+            <el-dialog title="Detail User" v-model="dialogTableVisible">
+              <el-row>
+                <el-col :span="12">
+                  <div class="ava">
+                    <img :src="userDialog.avatar" alt="avatar-user">
+                  </div>
+                </el-col>
+                <el-col :span="12">
+                  <p>{{userDialog.username}}</p>
+                  <p>Following : {{userDialog.following.length}}</p>
+                  <p>Followers : {{userDialog.followers.length}}</p>
+                  <el-button class="button" @click="followUser(userDialog.id)">Follow</el-button>
+                </el-col>
+
+              </el-row>
+            </el-dialog>
+            <el-button type="text" class="button" @click="showProfile(post.user)">{{post.user.username}}</el-button>
           </div>
         </div>
       </el-card>
@@ -18,6 +34,26 @@
 
 <script>
 export default {
+  data() {
+    return{
+      dialogTableVisible: false,
+      userDialog: {
+        name: '',
+        avatar: '',
+        following: [],
+        followers: []
+      }
+    }
+  },
+  methods: {
+    showProfile(user) {
+      this.userDialog = user
+      this.dialogTableVisible = true
+    },
+    followUser(targetid){
+      this.$store.dispatch('followUser',targetid)
+    }
+  },
   mounted() {
     if(this.statusLogin) {
       this.$store.dispatch('getPosts')
@@ -40,5 +76,10 @@ export default {
 <style lang="css" scoped>
  .image {
    width: 200px;
+ }
+
+ .ava img {
+   width: 150px;
+   border-radius: 100%;
  }
 </style>

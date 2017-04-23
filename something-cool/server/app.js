@@ -11,6 +11,7 @@ let express = require('express'),
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(cors())
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/dayins')
 mongoose.connection.on('connected', () => {
   console.log('mongo is connected');

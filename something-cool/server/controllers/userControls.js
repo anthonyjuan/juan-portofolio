@@ -33,6 +33,15 @@ module.exports = {
       }
     })
   },
+  getOneUser: (req , res) => {
+    User.findOne({_id:req.params.id},(err,user) => {
+      if(!err) {
+        res.send({success:true, msg:'Success', result:user})
+      } else {
+        res.send({success:false, msg:err})
+      }
+    })
+  },
   getUserFollowingPost: (req, res) => {
     User.findOne(
       {_id: req.params.id},
@@ -81,8 +90,8 @@ module.exports = {
         })
   },
   followUser: (req, res) => {
-    User.findByIdAndUpdate(
-      req.body.userid,
+    User.update(
+      {_id:req.body.userid},
       {
         $push : {
           following: req.body.targetid
@@ -91,8 +100,8 @@ module.exports = {
       { "new": true, "upsert": true },
       function(err) {
         if(!err) {
-          User.findByIdAndUpdate(
-            req.body.targetid,
+          User.update(
+            {_id:req.body.targetid},
             {
               $push : {
                 followers: req.body.userid
