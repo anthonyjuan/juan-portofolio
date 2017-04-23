@@ -3,6 +3,7 @@ import axios from 'axios'
 export const state = {
   statusLogin: false,
   posts: [],
+  followingPosts: [],
   dialogTableVisible: false,
   post: {
     userid:'',
@@ -16,15 +17,18 @@ export const mutations = {
   GET_POSTS(state, payload) {
     state.posts = payload
   },
+  GET_FOLLOWING_POSTS(state, payload) {
+    state.followingPosts = payload
+  },
   SIGN_IN(state, payload) {
     window.localStorage.setItem('token', payload.token)
-    window.localStorage.setItem('id', payload.id)
+    window.localStorage.setItem('id', payload.result._id)
     window.location.reload()
   },
   IF_LOGIN(state) {
     if(window.localStorage.token) {
       state.statusLogin = true
-        window.location.href= "/#/"
+      window.location.href= "/#/home"
     } else {
       state.statusLogin = false
     }
@@ -53,6 +57,18 @@ export const actions = {
          .then(function(res) {
            if(res.data.success){
              commit('GET_POSTS', res.data.result)
+           }
+         })
+  },
+  getFollowingPosts({commit}) {
+    let id = window.localStorage.id
+
+    axios.get(`http://localhost:3000/api/user/${id}`,
+              {headers: {'token': window.localStorage.getItem('token')}})
+         .then(function(res) {
+           if(res.data.success){
+             commit('GET_FOLLOWING_POSTS', res.data.result)
+            //  console.log(res.data.result);
            }
          })
   },
@@ -123,6 +139,9 @@ export const getters = {
   },
   posts(state) {
     return state.posts
+  },
+  followingPosts(state) {
+    return state.followingPosts
   },
   post(state) {
     return state.post

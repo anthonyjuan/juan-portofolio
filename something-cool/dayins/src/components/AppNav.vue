@@ -1,7 +1,7 @@
 <template lang="html">
   <el-menu theme="light" class="el-menu-demo" mode="horizontal">
-    <router-link to="/"><el-menu-item class="menuku" index="1">DAYINS</el-menu-item></router-link>
-    <router-link to="/"><el-menu-item class="menuku" index="2">Home</el-menu-item></router-link>
+    <router-link to="/home"><el-menu-item class="menuku" index="1">DAYINS</el-menu-item></router-link>
+    <router-link to="/home"><el-menu-item class="menuku" index="2">Home</el-menu-item></router-link>
     <router-link to="/explore"><el-menu-item class="menuku" index="2">Explore</el-menu-item></router-link>
     <!-- <el-menu-item index="6">
     <el-input

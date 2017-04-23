@@ -20,13 +20,13 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('ifLogin')
-    if(this.statusLogin) {
-      this.$store.dispatch('getPosts')
-      this.$router.push('/explore')
-    } else {
+    if(!this.statusLogin) {
       this.$router.push('/sitemap')
     }
+    this.$store.dispatch('ifLogin')
+    this.$store.dispatch('getPosts')
+    this.$store.dispatch('getFollowingPosts')
+
   }
 }
 </script>

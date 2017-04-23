@@ -38,13 +38,15 @@ module.exports = {
       function(err,user) {
         if(!err) {
           user.following.map((follow) => {
-            Post.find({user: follow}, function(err,posts) {
-              if(!err) {
-                res.send({success:true, result:posts})
-              } else {
-                res.send({success:false, result:err})
-              }
-            })
+            Post.find({user: follow})
+                .populate('user')
+                .exec(function(err,posts) {
+                  if(!err) {
+                    res.send({success:true, result:posts})
+                  } else {
+                    res.send({success:false, result:err})
+                  }
+                })
           })
         } else {
           res.send({success:false, result:err})
@@ -59,7 +61,7 @@ module.exports = {
       } else {
         if(pwh.verify( req.body.password,user.password)){
           let newToken = jwt.sign({username:user.username, id:user._id}, process.env.SECRET)
-          res.send({success:true, msg:'login success', token: newToken})
+          res.send({success:true, msg:'login success', token: newToken, result:user})
         } else {
           res.send({success:false, msg:err})
         }
