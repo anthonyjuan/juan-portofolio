@@ -1,5 +1,7 @@
 <template lang="html">
+
   <el-row :gutter="20">
+    <h1 v-if="followingPosts.length == 0">You don't follow anyone, try explore :)</h1>
     <el-col v-for="post in followingPosts" :key="post._id" :xs="12" :sm="8" :md="6" :lg="4">
       <el-card :body-style="{ padding: '0px' }">
         <img :src="post.image" class="image">

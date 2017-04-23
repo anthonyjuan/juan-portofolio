@@ -38,6 +38,19 @@ export default {
         password: this.password
       }
       this.$store.dispatch('signIn', user)
+    },
+    signup() {
+      this.$router.push('/signup')
+    }
+  },
+  computed: {
+    statusLogin() {
+      return this.$store.getters.statusLogin
+    }
+  },
+  mounted() {
+    if(this.statusLogin) {
+      this.$router.push('/home')
     }
   }
 }

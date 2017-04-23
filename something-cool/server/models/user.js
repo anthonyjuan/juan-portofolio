@@ -7,7 +7,7 @@ let userSchema = new Schema({
   email: String,
   username: {type: String, unique:true ,require:true},
   password: String,
-  avatar: String,
+  avatar: {type:String, default:'http://i.imgur.com/eDZnuoM.jpg'},
   following: [{type: Schema.Types.ObjectId, ref:'User'}],
   followers: [{type: Schema.Types.ObjectId, ref:'User'}]
 })

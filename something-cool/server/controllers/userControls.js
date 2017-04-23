@@ -17,7 +17,8 @@ module.exports = {
 
     newUser.save((err,newUser) => {
       if(!err) {
-        res.send({success:true, msg:'Success', result:newUser})
+        let newToken = jwt.sign({username:newUser.username, id:newUser._id}, process.env.SECRET)
+        res.send({success:true, msg:'Success', result:newUser, token:newToken})
       } else {
         res.send({success:false, msg:err})
       }

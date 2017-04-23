@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import SiteMap from '@/components/SiteMap'
 import Explore from '@/components/Explore'
 import Home from '@/components/Home'
+import SignUp from '@/components/SignUp'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
     }
   ]
 })

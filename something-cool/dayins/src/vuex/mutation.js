@@ -44,6 +44,11 @@ export const mutations = {
     let index = state.posts.findIndex(val => val._id == payload.id)
     state.posts.splice(index,1)
     state.posts.push(payload)
+  },
+  SIGN_UP(state, payload) {
+    window.localStorage.setItem('token', payload.token)
+    window.localStorage.setItem('id', payload.result._id)
+    window.location.reload()
   }
 
 }
@@ -84,10 +89,10 @@ export const actions = {
   },
   signUp({commit},dataUserLog) {
     let self = this
-    axios.post('http://localhost:3000/api/users', dataUserLog)
+    axios.post('http://localhost:3000/api/signup', dataUserLog)
          .then(function(res) {
            if(res.data.success) {
-             alert(res.data.msg)
+             commit('SIGN_UP', res.data)
            }
          })
   },
