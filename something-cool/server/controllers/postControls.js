@@ -18,11 +18,22 @@ module.exports = {
 
   },
   getAllPost: (req, res) => {
-    Post.find(function(err, posts) {
+    Post.find()
+        .populate('user')
+        .exec(function(err, posts) {
+          if(!err) {
+            res.send({success:true, result:posts})
+          } else {
+            res.send({success: false, result:err})
+          }
+        })
+  },
+  deletePost: (req,res) => {
+    Post.findByIdAndRemove(req.params.id, function(err) {
       if(!err) {
-        res.send({success:true, result:posts})
+        res.send({success:true, result:'delete success'})
       } else {
-        res.send({success: false, result:err})
+            res.send({success: false, result:err})
       }
     })
   }
